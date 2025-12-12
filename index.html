@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cat Runner 8-Bit 🐱</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Hata ayıklama kutusu */
+    #debug-console {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      color: #0f0;
+      font-family: monospace;
+      font-size: 12px;
+      padding: 10px;
+      box-sizing: border-box;
+      z-index: 9999;
+      max-height: 150px;
+      overflow-y: auto;
+      display: none; /* Hata olursa görünür yapacağız */
+      border-top: 2px solid #0f0;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-container">
+    <canvas id="gameCanvas" width="800" height="300"></canvas>
+    
+    <!-- Oyun İçi UI -->
+    <div id="gameOverOverlay" class="overlay hidden">
+      <h1>OYUN BİTTİ</h1>
+      <p>SKOR: <span id="finalScore">0</span></p>
+      
+      <div id="saveScoreForm">
+        <input type="text" id="playerName" placeholder="İSMİNİ YAZ" maxlength="10" autocomplete="off">
+        <button id="saveBtn">KAYDET</button>
+      </div>
+      
+      <button id="restartBtn">TEKRAR OYNA</button>
+    </div>
+  </div>
+
+  <div class="mobile-controls">
+    <button id="jumpBtn">ZIPLA</button>
+  </div>
+
+  <div class="leaderboard-section">
+    <h2>🏆 EN YÜKSEK SKORLAR 🏆</h2>
+    <div class="leaderboard-container">
+      <ul id="leaderboardList">
+        <li>Yükleniyor...</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Hata Konsolu -->
+  <div id="debug-console"></div>
+
+  <!-- Hata Yakalayıcı Script (En başta çalışmalı) -->
+  <script>
+    window.onerror = function(msg, url, lineNo, columnNo, error) {
+      const debugBox = document.getElementById('debug-console');
+      debugBox.style.display = 'block';
+      debugBox.innerHTML += `<p style="color: #ff5555;">❌ HATA: ${msg} <br> (Satır: ${lineNo})</p>`;
+      return false;
+    };
+
+    window.addEventListener('unhandledrejection', function(event) {
+      const debugBox = document.getElementById('debug-console');
+      debugBox.style.display = 'block';
+      debugBox.innerHTML += `<p style="color: #ff5555;">❌ Promise Hatası: ${event.reason}</p>`;
+    });
+  </script>
+
+  <!-- ÖNEMLİ: type="module" eklendi -->
+  <script type="module" src="./game.js"></script>
+</body>
+</html>

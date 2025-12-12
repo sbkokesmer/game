@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+    <html lang="tr">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Cat Runner 8-Bit 🐱</title>
+      <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+      <link rel="stylesheet" crossorigin href="/assets/index-Bj-TMuBr.css">
+    </head>
+    <body>
+      <div class="game-container">
+        <canvas id="gameCanvas" width="800" height="300"></canvas>
+        
+        <!-- Oyun İçi UI (Game Over durumunda görünür) -->
+        <div id="gameOverOverlay" class="overlay hidden">
+          <h1>OYUN BİTTİ</h1>
+          <p>SKOR: <span id="finalScore">0</span></p>
+          
+          <div id="saveScoreForm">
+            <input type="text" id="playerName" placeholder="İSMİNİ YAZ" maxlength="10" autocomplete="off">
+            <button id="saveBtn">KAYDET</button>
+          </div>
+          
+          <button id="restartBtn">TEKRAR OYNA</button>
+        </div>
+      </div>
+
+      <div class="mobile-controls">
+        <button id="jumpBtn">ZIPLA</button>
+      </div>
+
+      <!-- Liderlik Tablosu -->
+      <div class="leaderboard-section">
+        <h2>🏆 EN YÜKSEK SKORLAR 🏆</h2>
+        <div class="leaderboard-container">
+          <ul id="leaderboardList">
+            <li>Yükleniyor...</li>
+          </ul>
+        </div>
+      </div>
+
+      <script src="./game.js"></script>
+    </body>
+    </html>
